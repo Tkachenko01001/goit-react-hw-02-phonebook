@@ -1,10 +1,8 @@
 import ListElement from "components/listElement/listElement";
+import PropTypes from "prop-types";
 import { Button } from "../styled/style.styled";
 
-const ContactList = ({contacts, filter, handleDeleteContact}) => {
-    const filteredContacts = contacts.filter(contact => 
-    contact.name.toLowerCase().includes(filter.toLowerCase()))
-
+const ContactList = ({filteredContacts, handleDeleteContact}) => {
     return (
         <ul>
         {filteredContacts.map((contact) => (
@@ -17,6 +15,15 @@ const ContactList = ({contacts, filter, handleDeleteContact}) => {
       ))}
     </ul>
     )
+}
+
+ContactList.propTypes = {
+  filteredContacts: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired
+  })).isRequired,
+  handleDeleteContact: PropTypes.func.isRequired
 }
 
 export default ContactList;

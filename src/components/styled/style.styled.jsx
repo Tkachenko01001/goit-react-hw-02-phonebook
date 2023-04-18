@@ -31,3 +31,7 @@ export const Input = styled.input`
    width: 170px;
    border: 1px solid #d0d0d0;
 `;
+
+export const Div = styled.div`
+   margin: 30px;
+`

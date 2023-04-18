@@ -3,6 +3,7 @@ import { Component } from "react";
 import ContactForm from 'components/ContactForm/ContactForm';
 import Filter from 'components/Filter/Filter';
 import ContactList from 'components/Contacts-list/contactLists';
+import { Div } from 'components/styled/style.styled';
 class App extends Component {
   
   state = {
@@ -10,21 +11,29 @@ class App extends Component {
     filter: '',
   }
   
+  handleClearForm = () => {
+    this.setState({
+      name: '',
+      number: '',
+    });
+  }
 
   handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const {contacts, name, number} = this.state;
     const id = nanoid();
     const newContact = {id, name, number};
-
+  
     if (this.checkDuplicateContact(newContact)) {
       alert(`${newContact.name} is already in contacts`);
       return;
     }
-
+  
     this.setState ({
       contacts: [...contacts, newContact],
-    })
+    }, () => {
+      e.target.reset();
+    });
   }
 
   handleChange = (e) => {
@@ -53,15 +62,17 @@ class App extends Component {
 
   render() {
     const { contacts, filter } = this.state;
+    const filteredContacts = contacts.filter(contact => 
+    contact.name.toLowerCase().includes(filter.toLowerCase()))
     
     return (
-      <div>
+      <Div>
         <h1>Phonebook</h1>
         <ContactForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
         <h2>Contacts</h2>
         <Filter filter={filter} handleFilterChange={this.handleFilterChange} />
-        <ContactList contacts={contacts} filter={filter} handleDeleteContact={this.deleteContact} />
-      </div>
+        <ContactList filteredContacts={filteredContacts} handleDeleteContact={this.deleteContact} />
+      </Div>
     )
   }
 }

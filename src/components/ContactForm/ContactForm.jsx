@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Form, Button, Label, Input } from "../styled/style.styled";
 
 const ContactForm = ({handleChange, handleSubmit}) => {
@@ -30,4 +31,9 @@ const ContactForm = ({handleChange, handleSubmit}) => {
     )
   }
   
+  ContactForm.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+  }
+
   export default ContactForm;
