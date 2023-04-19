@@ -1,13 +1,12 @@
 import PropTypes from "prop-types";
 import { Form, Button, Label, Input } from "../styled/style.styled";
 
-const ContactForm = ({handleChange, handleSubmit, name, number}) => {
+const ContactForm = ({handleChange, handleSubmit}) => {
     return (
       <Form onSubmit={handleSubmit}>
         <Label>
           Name
           <Input
-            value={name}
             onChange={handleChange}
             type="text"
             name="name"
@@ -19,7 +18,6 @@ const ContactForm = ({handleChange, handleSubmit, name, number}) => {
         <Label>
           Number
           <Input
-            value={number}
             onChange={handleChange}
             type="tel"
             name="number"
