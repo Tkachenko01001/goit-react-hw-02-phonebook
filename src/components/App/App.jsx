@@ -9,6 +9,8 @@ class App extends Component {
   state = {
     contacts: [],
     filter: '',
+    name: '',
+    number: '',
   }
   
   handleClearForm = () => {
@@ -61,7 +63,7 @@ class App extends Component {
   };
 
   render() {
-    const { contacts, filter } = this.state;
+    const { contacts, filter, name, number } = this.state;
     const filteredContacts = contacts.filter(contact => 
     contact.name.toLowerCase().includes(filter.toLowerCase()))
     
@@ -70,7 +72,7 @@ class App extends Component {
         <h1>Phonebook</h1>
         <ContactForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
         <h2>Contacts</h2>
-        <Filter filter={filter} handleFilterChange={this.handleFilterChange} />
+        <Filter filter={filter} handleFilterChange={this.handleFilterChange} name={name} number={number} />
         <ContactList filteredContacts={filteredContacts} handleDeleteContact={this.deleteContact} />
       </Div>
     )
